@@ -8,6 +8,10 @@ public class Item {
 	private int quantity;
 	private int minQuantity;
 	
+	Item()
+	{
+		
+	}
 	
 	Item(String name, String description, double price, int quantity, int minQuantity) 
 	{	
