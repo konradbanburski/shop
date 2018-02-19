@@ -9,19 +9,17 @@ public class Main {
 	public static void main(String[] args) throws SQLException {
 	
 		Database database = new Database();
-
-		String sql = ("SELECT NAME, PRICE, QUANTITY"
-				+ "FROM PRODUCTS;");
+		SqlCreator sqlCreator = new SqlCreator();
+		//String sql = sqlCreator.sqlInsertProducts("Koperek", "nie", -1, -5, 0);
+		//database.insert(sql);
+		
 	
-		ArrayList<Item> queryList = new ArrayList<Item>();
-		queryList = database.select(sql);
-	 
-		for(int i = 0; i<queryList.size(); i++)
-		{
-			System.out.println(queryList.get(i).toString());
-        
-        }
-	         
+   
+		String sql = sqlCreator.sqlDeleteProduct("PRODUCTS", "NAME = 'Marchew' AND ID = 1");
+		System.out.println(sql);
+		
+		database.delete(sql);
+		
 	      
 	     
 	}
