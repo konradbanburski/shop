@@ -1,5 +1,10 @@
 package shop;
 
+/**
+ * 
+ * Item class. Contains properties of item.
+ *
+ */
 public class Item {
 
 	private String name;
@@ -74,7 +79,7 @@ public class Item {
 	
 	public String toString()
 	{
-		return name;
+		return name + " " + description + " " + price + " " + quantity + " " + minQuantity;
 	}
 	
 }

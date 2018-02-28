@@ -1,5 +1,8 @@
 package shop;
 
+/**
+ * Database connecting class. 
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -18,7 +21,7 @@ class Database {
 	    try {
 	        Class.forName("org.postgresql.Driver");	        
 	        connection = DriverManager.getConnection(
-	        		"jdbc:postgresql://localhost:5432/products","postgres", "16686816");
+	        		"jdbc:postgresql://localhost:5432/database","postgres", "16686816");
 	        System.out.println("Conected with database");
 	      
 	        connection.close();
@@ -37,7 +40,7 @@ class Database {
 		try {
 			Class.forName("org.postgresql.Driver");
 			connection = DriverManager.getConnection(
-		        	"jdbc:postgresql://localhost:5432/products","postgres", "16686816");
+		        	"jdbc:postgresql://localhost:5432/database","postgres", "16686816");
 			System.out.println("Conected with database");
 			statement = connection.createStatement();
 			 String sql = "CREATE TABLE ORDERS" +
@@ -86,13 +89,19 @@ class Database {
     }
 }
 
+	/**
+	 * Inserting method. 
+	 * This method connecting with database print information if connection done then execute update. 
+	 * Finally print information if everything is correct or something went wrong.  
+	 * @param sql - SQL query 
+	 */
     public void insert(String sql) {
     		Connection connection = null;
     		Statement statement = null;
 	    try {
 	    		Class.forName("org.postgresql.Driver");
 	        connection = DriverManager
-	        		.getConnection("jdbc:postgresql://localhost:5432/products",
+	        		.getConnection("jdbc:postgresql://localhost:5432/database",
 	        		"postgres", "16686816");
 	        connection.setAutoCommit(false);
 	        System.out.println("Conected with database");
@@ -109,14 +118,21 @@ class Database {
 	    System.out.println("Record created");
     }
 
-    public ArrayList<Item> select(String sql) {
+    /**
+	 * Selecting method. 
+	 * This method connecting with database print information if connection done then execute query. 
+	 * Finally print information if everything is correct or something went wrong.  
+	 * @param sql - SQL query 
+	 * @return ArrayList<Item> 
+	 */
+    public ArrayList<Item> selectAll(String sql) {
     		ArrayList<Item> queryList = new ArrayList<Item>();
 	    Connection connection = null;
 	    Statement statement = null;
 	    try {
 	        Class.forName("org.postgresql.Driver");
 	        connection = DriverManager
-	        		.getConnection("jdbc:postgresql://localhost:5432/products",
+	        		.getConnection("jdbc:postgresql://localhost:5432/database",
 	        		"postgres", "16686816");
 	        connection.setAutoCommit(false);
 	        System.out.println("Conected with database");
@@ -124,6 +140,7 @@ class Database {
 	        statement = connection.createStatement();
 	        ResultSet rs = statement.executeQuery(sql);
 	        	        
+	        
 	        			while (rs.next()) {
 	        	            Item item = new Item();
 	        	            item.setName(rs.getString("NAME"));
@@ -150,29 +167,65 @@ class Database {
 		
 	 }
     
-    /*public int selectChecker(String sql) {
-	    	String products = "PRODUCTS";
-	    	String users = "USERS";
-	    	
-	    if(sql.contains(products)) 
-	    {
-	    		return 0;
-	    }
-	    if(sql.contains(users)) 
-	    {
-	    		return 1;
-	    }
-	    return -1;
-    	
-    }*/
+    /**
+	 * Selecting method. 
+	 * This method connecting with database print information if connection done then execute query. 
+	 * Finally print information if everything is correct or something went wrong.  
+	 * @param sql - SQL query 
+	 * @return Item
+	 */   
+    public Item selectOne(String sql) {
+    	Item item = new Item();	
+    Connection connection = null;
+    Statement statement = null;
+    try {
+        Class.forName("org.postgresql.Driver");
+        connection = DriverManager
+        		.getConnection("jdbc:postgresql://localhost:5432/database",
+        		"postgres", "16686816");
+        connection.setAutoCommit(false);
+        System.out.println("Conected with database");
+
+        statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        	        
+        			while (rs.next()) {      	          
+        	            item.setName(rs.getString("NAME"));
+        	            item.setDescription(rs.getString("DESCRIPTION"));
+        	            item.setPrice(rs.getDouble("price"));
+        	            item.setQuantity(rs.getInt("quantity"));
+        	            item.setMinQuantity(rs.getInt("min_Quantity"));        	       
+        	        }
+        		        
+        rs.close();
+        statement.close();
+        connection.close();
+        return item;
+    }
+    
+     catch ( Exception e ) {
+    		e.printStackTrace();
+    }
+    System.out.println("Select done.");
+	return null;
+  
+	
+	
+ }
         
+    /**
+	 * Updating method. 
+	 * This method connecting with database print information if connection done then execute update. 
+	 * Finally print information if everything is correct or something went wrong.  
+	 * @param sql - SQL query 
+	 */
     public void update(String sql) {
     		Connection connection = null;
         Statement statement = null;
         try {
         	  	Class.forName("org.postgresql.Driver");
   	        connection = DriverManager
-  	        		.getConnection("jdbc:postgresql://localhost:5432/products",
+  	        		.getConnection("jdbc:postgresql://localhost:5432/database",
   	        		"postgres", "16686816");
   	        connection.setAutoCommit(false);
   	        System.out.println("Conected with database");
@@ -187,13 +240,19 @@ class Database {
 	    System.out.println("Record updated.");
     }
     
+    /**
+	 * Deleting method. 
+	 * This method connecting with database print information if connection done then execute update. 
+	 * Finally print information if everything is correct or something went wrong.  
+	 * @param sql - SQL query 
+	 */
     public void delete(String sql) {
 		Connection connection = null;
     Statement statement = null;
     try {
     	  	Class.forName("org.postgresql.Driver");
 	        connection = DriverManager
-	        		.getConnection("jdbc:postgresql://localhost:5432/products",
+	        		.getConnection("jdbc:postgresql://localhost:5432/database",
 	        		"postgres", "16686816");
 	        connection.setAutoCommit(false);
 	        System.out.println("Conected with database");
@@ -207,6 +266,25 @@ class Database {
     }
     System.out.println("Record deleted.");
 }
+
+   
+    
+    public int selectChecker(String sql) {
+		String products = "PRODUCTS";
+		String users = "USERS";
+	
+		if(sql.contains(products)) 
+		{
+			return 0;
+		}
+		if(sql.contains(users)) 
+		{
+			return 1;
+		}
+		return -1;
+
+	}
+	
 }
 
 

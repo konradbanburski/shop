@@ -8,19 +8,34 @@ public class Main {
 
 	public static void main(String[] args) throws SQLException {
 	
-		Database database = new Database();
+		Database db= new Database();
 		SqlCreator sqlCreator = new SqlCreator();
-		//String sql = sqlCreator.sqlInsertProducts("Koperek", "nie", -1, -5, 0);
-		//database.insert(sql);
+		Basket basket = new Basket();
+		
+		
+
+		
+		ArrayList<Item> koszyk = basket.getBasket();
+	
 		
 	
-   
-		String sql = sqlCreator.sqlDeleteProduct("PRODUCTS", "NAME = 'Marchew' AND ID = 1");
-		System.out.println(sql);
+		for(int i = 0; i<koszyk.size(); i++)
+		{
+			System.out.println(koszyk.get(i));
+		}
+	 
+	
+		Item item = new Item("Jabłko", "dupa", 22.2, 80, 2);
+		basket.addItemToBasket(item, 10);
+		for(int i = 0; i<koszyk.size(); i++)
+		{
+			System.out.println(koszyk.get(i));
+		}
 		
-		database.delete(sql);
-		
-	      
-	     
+		basket.deleteItemFromBasket(0);
+		for(int i = 0; i<koszyk.size(); i++)
+		{
+			System.out.println(koszyk.get(i));
+		}
 	}
 }
