@@ -1,4 +1,4 @@
-package shop;
+package database;
 
 /**
  * Database connecting class. 
@@ -10,9 +10,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import shop.Item;
+import users.User;
 
 
-class Database {
+
+public class Database {
 	
 	
 	
@@ -125,7 +128,7 @@ class Database {
 	 * @param sql - SQL query 
 	 * @return ArrayList<Item> 
 	 */
-    public ArrayList<Item> selectAll(String sql) {
+    public ArrayList<Item> selectAllProducts(String sql) {
     		ArrayList<Item> queryList = new ArrayList<Item>();
 	    Connection connection = null;
 	    Statement statement = null;
@@ -174,7 +177,7 @@ class Database {
 	 * @param sql - SQL query 
 	 * @return Item
 	 */   
-    public Item selectOne(String sql) {
+    public Item selectOneProduct(String sql) {
     	Item item = new Item();	
     Connection connection = null;
     Statement statement = null;
@@ -266,25 +269,82 @@ class Database {
     }
     System.out.println("Record deleted.");
 }
-
    
-    
-    public int selectChecker(String sql) {
-		String products = "PRODUCTS";
-		String users = "USERS";
-	
-		if(sql.contains(products)) 
-		{
-			return 0;
-		}
-		if(sql.contains(users)) 
-		{
-			return 1;
-		}
-		return -1;
+    public ArrayList<User> selectAllUsers(String sql) {
+		ArrayList<User> queryList = new ArrayList<User>();
+    Connection connection = null;
+    Statement statement = null;
+    try {
+        Class.forName("org.postgresql.Driver");
+        connection = DriverManager
+        		.getConnection("jdbc:postgresql://localhost:5432/database",
+        		"postgres", "16686816");
+        connection.setAutoCommit(false);
+        System.out.println("Conected with database");
 
-	}
+        statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        	        
+        
+        			while (rs.next()) {
+        	            User user = new User();
+        	            user.setUserName(rs.getString("USER_NAME"));
+        	            user.setPassword(rs.getString("PASSWORD"));
+        	            user.setType(rs.getString("TYPE"));
+        	            queryList.add(user);
+        	        }
+        		        
+        rs.close();
+        statement.close();
+        connection.close();
+        return queryList;
+    }
+    
+     catch ( Exception e ) {
+    		e.printStackTrace();
+    }
+    System.out.println("Select done.");
+	return null;
+  
 	
+	
+ }
+	
+    public User selectOneUser(String sql) {
+    	User user = new User();	
+    Connection connection = null;
+    Statement statement = null;
+    try {
+        Class.forName("org.postgresql.Driver");
+        connection = DriverManager
+        		.getConnection("jdbc:postgresql://localhost:5432/database",
+        		"postgres", "16686816");
+        connection.setAutoCommit(false);
+        System.out.println("Conected with database");
+
+        statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        	        
+        
+        while (rs.next()) {
+            user.setUserName(rs.getString("USER_NAME"));
+            user.setPassword(rs.getString("PASSWORD"));
+            user.setType(rs.getString("TYPE"));
+        }
+        		        
+        rs.close();
+        statement.close();
+        connection.close();
+        return user;
+    }
+    
+     catch ( Exception e ) {
+    		e.printStackTrace();
+    }
+    System.out.println("Select done.");
+	return null;	
+ }
+    
 }
 
 

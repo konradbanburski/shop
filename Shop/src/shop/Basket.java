@@ -6,6 +6,9 @@ package shop;
  */
 import java.util.ArrayList;
 
+import database.Database;
+import database.SqlCreator;
+
 public class Basket {
 
 	private ArrayList<Item> basket = new ArrayList<Item>();
@@ -26,7 +29,7 @@ public class Basket {
 	public void addItemToBasket(Item item, int quantity) {
 		basket.add(item);		
 		int finalQuantity = item.getQuantity() - quantity;
-		String sql = sqlCreator.updateProduct("PRODUCTS","NAME = " + "'" +item.getName() + "'" , "QUANTITY", String.valueOf(finalQuantity));
+		String sql = sqlCreator.updateQuery("PRODUCTS","NAME = " + "'" +item.getName() + "'" , "QUANTITY", String.valueOf(finalQuantity));
 		System.out.println(sql);
 		db.update(sql);
 		item.setQuantity(quantity);
@@ -37,12 +40,12 @@ public class Basket {
 		System.out.println(quantityInBasket);
 		String nameOfItem = basket.get(index).getName();
 		System.out.println(nameOfItem);
-		String sql = sqlCreator.select("PRODUCTS", "NAME = " + "'" + nameOfItem + "'", null, null);
-		int quantityInDB = db.selectOne(sql).getQuantity();
+		String sql = sqlCreator.selectQuery("PRODUCTS", "NAME = " + "'" + nameOfItem + "'", null, null);
+		int quantityInDB = db.selectOneProduct(sql).getQuantity();
 		System.out.println(quantityInDB);
 		int finalQuantity = quantityInBasket + quantityInDB;
 		System.out.println(finalQuantity);
-		sql = sqlCreator.updateProduct("PRODUCTS", "NAME = " + "'" + nameOfItem + "'", "QUANTITY", String.valueOf(finalQuantity));
+		sql = sqlCreator.updateQuery("PRODUCTS", "NAME = " + "'" + nameOfItem + "'", "QUANTITY", String.valueOf(finalQuantity));
 		db.update(sql);
 		basket.remove(index);
 	}

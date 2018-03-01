@@ -1,10 +1,10 @@
-package shop;
+package database;
 /**
  * This class contains methods that create sql queries.
  */
 public class SqlCreator{
 
-	SqlCreator()
+	public SqlCreator()
 	{
 		
 	}
@@ -19,7 +19,7 @@ public class SqlCreator{
 	 * @param minQuantity
 	 * @return Finished PostgreSQL INSERT query in String.
 	 */
-	public String insertProducts(String name, String description, double price, int quantity, int minQuantity) 
+	public String insertProductQuery(String name, String description, double price, int quantity, int minQuantity) 
 	{
 		String sql= "INSERT INTO PRODUCTS (NAME, DESCRIPTION, PRICE, QUANTITY, MIN_QUANTITY)" + 
 				"VALUES(" + "'" + name + "'" + "," +
@@ -38,7 +38,7 @@ public class SqlCreator{
 	 * @param typeOfOrder - DESC - if u want sort records descending, default or null or others value sort records ascending
 	 * @return Finished PostgreSQL SELECT query in String.
 	 */
-	public String select(String tableName, String where, String orderBy, String typeOfOrder)
+	public String selectQuery(String tableName, String where, String orderBy, String typeOfOrder)
 	{
 		String sql= "SELECT * FROM " + tableName;
 		if(where != null) 
@@ -65,9 +65,8 @@ public class SqlCreator{
 	 * @param value - new value of this columnName
 	 * @return Finished PostgreSQL UPDATE query in String.
 	 */
-	public String updateProduct(String tableName, String where, String columnName, String value)
-	{
-		
+	public String updateQuery(String tableName, String where, String columnName, String value)
+	{		
 		String sql= "UPDATE " + tableName + " set " + columnName + " = " + value + " WHERE " + where + ";";
 		return sql;
 	}
@@ -78,10 +77,23 @@ public class SqlCreator{
 	 * @param where - example: "where column_name = 'value'"
 	 * @return Finished PostgreSQL DELETE query in String.
 	 */
-	public String deleteProduct(String tableName, String where) 
+	public String deleteQuery(String tableName, String where) 
 	{
 		String sql= "DELETE FROM " + tableName + " WHERE " + where + ";";
 		return sql;
 	}
+	
+	
+	
+	public String insertUserQuery(String userName, String password, String type) 
+	{
+		String sql= "INSERT INTO USERS (USER_NAME, PASSWORD, TYPE)" + 
+				"VALUES(" + "'" + userName + "'" + "," +
+						"'" + password + "'" + "," +
+						"'" + type + "'" + ");";
+		return sql;
+	}
+	
+	
 	
 }

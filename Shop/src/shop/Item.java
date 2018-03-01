@@ -7,13 +7,13 @@ package shop;
  */
 public class Item {
 
-	private String name;
-	private String description;
-	private double price;
-	private int quantity;
-	private int minQuantity;
+	private String name = "";
+	private String description = "";
+	private double price = 0;
+	private int quantity = 0;
+	private int minQuantity = 0;
 	
-	Item()
+	public Item()
 	{
 		
 	}

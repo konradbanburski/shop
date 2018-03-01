@@ -6,6 +6,9 @@ package shop;
  */
 import java.util.ArrayList;
 
+import database.Database;
+import database.SqlCreator;
+
 public class ItemsContainer {
 
 	private ArrayList<Item> itemList = new ArrayList<Item>();
@@ -14,12 +17,12 @@ public class ItemsContainer {
 	
 	public ItemsContainer()
 	{
-		DbToList(sqlCreator.select("PRODUCTS", null, null, null)); 
+		DbToList(sqlCreator.selectQuery("PRODUCTS", null, null, null)); 
 	}
 
 	public void DbToList(String sql) {
 		itemList.clear();
-		setArrayList(db.selectAll(sql));
+		setArrayList(db.selectAllProducts(sql));
 	}
 	
 	
