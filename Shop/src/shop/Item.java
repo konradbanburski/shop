@@ -6,25 +6,27 @@ package shop;
  *
  */
 public class Item {
-
+	
 	private String name = "";
-	private String description = "";
+	private String description = "";	
 	private double price = 0;
 	private int quantity = 0;
 	private int minQuantity = 0;
+	private String type = "other";
 	
 	public Item()
 	{
 		
 	}
 	
-	Item(String name, String description, double price, int quantity, int minQuantity) 
+	Item(String name, String description, double price, int quantity, int minQuantity, String type) 
 	{	
 		this.name = name;
-		this.description = description;
+		this.description = description;		
 		this.price = price;
 		this.quantity = quantity;
 		this.minQuantity = minQuantity;
+		this.type = type;
 	}
 	
 	public String getName()
@@ -35,6 +37,11 @@ public class Item {
 	public String getDescription()
 	{
 		return description;
+	}
+	
+	public String getType()
+	{
+		return type;
 	}
 	
 	public double getPrice()
@@ -62,6 +69,11 @@ public class Item {
 		this.description = description;
 	}
 	
+	public void setType(String type)
+	{
+		this.type = type;
+	}
+	
 	public void setPrice(double price)
 	{
 		this.price = price;
@@ -79,7 +91,7 @@ public class Item {
 	
 	public String toString()
 	{
-		return name + " " + description + " " + price + " " + quantity + " " + minQuantity;
+		return name + " " + description + " " + price + " " + quantity + " " + minQuantity + " " + type;
 	}
 	
 }

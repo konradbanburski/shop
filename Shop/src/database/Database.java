@@ -151,6 +151,7 @@ public class Database {
 	        	            item.setPrice(rs.getDouble("price"));
 	        	            item.setQuantity(rs.getInt("quantity"));
 	        	            item.setMinQuantity(rs.getInt("min_Quantity"));
+	        	            item.setType(rs.getString("TYPE"));
 	        	            queryList.add(item);
 	        	        }
 	        		        
@@ -197,7 +198,8 @@ public class Database {
         	            item.setDescription(rs.getString("DESCRIPTION"));
         	            item.setPrice(rs.getDouble("price"));
         	            item.setQuantity(rs.getInt("quantity"));
-        	            item.setMinQuantity(rs.getInt("min_Quantity"));        	       
+        	            item.setMinQuantity(rs.getInt("min_Quantity"));
+        	            item.setType(rs.getString("TYPE"));
         	        }
         		        
         rs.close();

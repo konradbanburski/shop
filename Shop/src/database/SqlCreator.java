@@ -19,16 +19,18 @@ public class SqlCreator{
 	 * @param minQuantity
 	 * @return Finished PostgreSQL INSERT query in String.
 	 */
-	public String insertProductQuery(String name, String description, double price, int quantity, int minQuantity) 
+	public String insertProductQuery(String name, String description, double price, int quantity, int minQuantity, String type) 
 	{
-		String sql= "INSERT INTO PRODUCTS (NAME, DESCRIPTION, PRICE, QUANTITY, MIN_QUANTITY)" + 
+		String sql= "INSERT INTO PRODUCTS (NAME, DESCRIPTION, PRICE, QUANTITY, MIN_QUANTITY, )" + 
 				"VALUES(" + "'" + name + "'" + "," +
-						"'" + description + "'" + "," +
+						"'" + description + "'" + "," +					
 						price + "," +
 						quantity + "," +
-						minQuantity + ");";
+						minQuantity + "," +
+						"'" + type + "'" +");";
 		return sql;
 	}
+	
 	
 	/**
 	 * This method create PostgreSQL SELECT query.
@@ -37,7 +39,7 @@ public class SqlCreator{
 	 * @param orderBy - name of column or name of columns, example "column_name" or "column_name, column_name_2, ... column_name_n) 
 	 * @param typeOfOrder - DESC - if u want sort records descending, default or null or others value sort records ascending
 	 * @return Finished PostgreSQL SELECT query in String.
-	 */
+	 */	
 	public String selectQuery(String tableName, String where, String orderBy, String typeOfOrder)
 	{
 		String sql= "SELECT * FROM " + tableName;

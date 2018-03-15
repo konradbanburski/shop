@@ -1,0 +1,28 @@
+#mainPane {
+	-fx-background-color: lightgrey;
+}
+
+#buttonMenu {
+	-fx-background-color: black;
+}
+
+#sidePane {
+	-fx-background-color: #BBBBBB;
+}
+
+#buttonMenu:hover {
+	-fx-background-color: #333333;
+}
+ 
+#typeListView {
+	
+	-fx-background-color: lightgrey;
+	-fx-border-color: #BBBBBB;
+	-fx-border-width: 2;
+	-fx-border-style: hidden solid hidden hidden;
+	
+}
+
+
+
+.root { -fx-focus-color: transparent; -fx-faint-focus-color: transparent }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="mainPane" fx:id="mainPane" maxHeight="720.0" maxWidth="1024.0" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1024.0" stylesheets="@StartFXML.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartFXMLController">
+   <children>
+      <ListView id="typeListView" fx:id="typeListView" layoutY="70.0" maxHeight="580.0" maxWidth="200.0" minHeight="580.0" minWidth="200.0" prefHeight="580.0" prefWidth="200.0" />
+      <Pane id="sidePane" fx:id="sidePane" layoutX="1024.0" maxHeight="720.0" maxWidth="200.0" minHeight="720.0" minWidth="200.0" prefHeight="720.0" prefWidth="200.0" />
+      <Pane id="buttonMenu" fx:id="buttonMenu" maxHeight="36.0" maxWidth="36.0" minHeight="36.0" minWidth="36.0" onMouseClicked="#menuAction" prefHeight="36.0" prefWidth="36.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Line id="lineOne" fx:id="lineOne" endX="30.5" endY="12.0" startX="5.0" startY="12.0" stroke="WHITE" strokeLineCap="ROUND" />
+            <Line id="lineTwo" fx:id="lineTwo" endX="30.5" endY="18.0" startX="5.0" startY="18.0" stroke="WHITE" strokeLineCap="ROUND" />
+            <Line id="lineThree" fx:id="lineThree" endX="30.5" endY="24.0" startX="5.0" startY="24.0" stroke="WHITE" strokeLineCap="ROUND" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

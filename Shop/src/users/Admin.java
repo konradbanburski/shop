@@ -11,9 +11,9 @@ public class Admin {
 	SqlCreator sqlCreator = new SqlCreator();
 	Database db = new Database();
 	
-	public void addNewItem(String name, String description, double price, int quantity, int minQuantity)
+	public void addNewItem(String name, String description, double price, int quantity, int minQuantity, String type)
 	{
-		String sql = sqlCreator.insertProductQuery(name, description, price, quantity, minQuantity);
+		String sql = sqlCreator.insertProductQuery(name, description, price, quantity, minQuantity, type);
 		db.insert(sql);
 	}
 	
@@ -44,6 +44,12 @@ public class Admin {
 	public void updateItemMinQuantity(String name, int newMinQuantity )
 	{
 		String sql = sqlCreator.updateQuery("PRODUCTS", "NAME = '" + name + "'", "MIN_QUANTITY", String.valueOf(newMinQuantity));
+		db.update(sql);
+	}
+	
+	public void updateItemType(String name, String type)
+	{
+		String sql = sqlCreator.updateQuery("PRODUCTS", "NAM = '" + name + "'", "TYPE", type);
 		db.update(sql);
 	}
 	

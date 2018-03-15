@@ -10,17 +10,18 @@ public class Main extends Application {
 
 	@Override
     public void start(Stage stage) throws Exception {
-        Parent sceneLogin = FXMLLoader.load(getClass().getResource("/sklepGui/LoginFXML.fxml"));
+        Parent sceneLogin = FXMLLoader.load(getClass().getResource("/gui/StartFXML.fxml"));
         
         
         
         Scene sLogin = new Scene(sceneLogin);
-        
-        
+               
         stage.setScene(sLogin);
         stage.show();
+	}
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
 }
+ 
